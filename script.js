@@ -1,4 +1,3 @@
-console.log('Hello World');
 
 let words = ['hola', 'mundo', 'desde', 'javascript'];  // array con las palabras
 
@@ -14,10 +13,10 @@ createdivusedletters(lettersUsed);  // crea el div donde se va a guardar las let
 
 
 
+createhangman(); //crea el div del ahorcado
 
 
-
-  function createElementWord(word) {
+function createElementWord(word) {
     let palabra = document.createElement('div');
     
     // palabra.innerText = word;
@@ -85,6 +84,7 @@ function checkletter() {
         console.log('aciertos' +success);
     }else{
         misses++;
+        updatehangman(misses);
       
         console.log('fallos' +misses);
 
@@ -105,3 +105,135 @@ function updateDivUsedLetters() {
 }
 document.querySelector('button').addEventListener('click', checkletter);
 
+
+function createhangman(){
+    let hangman=document.createElement('div');
+    hangman.classList.add('hangman');
+    hangman.innerHTML = `
+       
+   `;
+    document.body.appendChild(hangman);
+}
+
+function updatehangman(misses){
+    let hangman=document.querySelector('.hangman');
+
+
+    switch(misses){
+    
+        case 1 :  hangman.innerHTML = 
+        `
+
+    ------
+    |    
+    |   
+    |   
+    |   
+    |
+    ---------
+      `; 
+     break;
+
+     case 2 :  hangman.innerHTML = 
+     `
+
+    ------
+    |    |
+    |   
+    |   
+    |   
+    |
+    ---------
+   `;
+   break;
+
+
+
+    case 3 :  hangman.innerHTML = 
+    `
+
+    ------
+    |    |
+    |    O
+    |     
+    |   
+    |
+    ---------
+   `;
+   break;
+
+
+   case 4:  hangman.innerHTML = 
+   `
+
+    ------
+    |    |
+    |    O
+    |    |
+    |   
+    |
+    ---------
+   `;
+ break;
+ 
+ case 5:  hangman.innerHTML = 
+ `
+
+    ------
+    |    |
+    |    O
+    |   /|
+    |   
+    |
+    ---------
+    `;
+break;
+
+
+case 6:  hangman.innerHTML = 
+
+`
+
+    ------
+    |    |
+    |    O
+    |   /|\\
+    |   
+    |
+    ---------
+    `;
+break;
+
+case 7 :  hangman.innerHTML = 
+`
+
+    ------
+    |    |
+    |    O
+    |   /|\\
+    |   /
+    |
+    ---------
+    `;
+break;
+ 
+case 8 :  hangman.innerHTML = 
+
+`
+
+    ------
+    |    |
+    |    O
+    |   /|\\
+    |   / \\
+    |
+    ---------
+    `;      
+
+
+
+
+    
+}
+
+}
