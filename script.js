@@ -6,6 +6,7 @@ let words = ['hola', 'mundo', 'desde', 'javascript'];  // array con las palabras
  let success=0;
  let misses=0;
  let lettersUsed=[];
+ let divjuego = document.querySelector('.juego');
 
 createElementWord(word);   //crea el div de la palabra y las letras :D
 
@@ -14,7 +15,7 @@ createdivusedletters(lettersUsed);  // crea el div donde se va a guardar las let
 
 
 createhangman(); //crea el div del ahorcado
-
+createButtons(); //crea los botones de las letras
 
 function createElementWord(word) {
     let palabra = document.createElement('div');
@@ -34,7 +35,7 @@ function createElementWord(word) {
         
     }
     
-   document.body.appendChild(palabra);
+   divjuego.appendChild(palabra);
  
   }
 function selectRandomWord(words) {
@@ -43,61 +44,61 @@ function selectRandomWord(words) {
     return words[index];
 }
 
-function checkletter() {
+function checkletter(input) {
     let acierto = false;
-    let inputLetter = document.querySelector('#inputletter').value.toLowerCase();
+    let inputLetter = input.toLowerCase();
     let letters = document.querySelectorAll('.letter');
+    let wordSize = word.length;
 
-  if(inputLetter === ''){
-    return false;
-  } else {
+    if (inputLetter === '') {
+        return false;
+    } else {
+        for (let i = 0; i < letters.length; i++) {
+            if (letters[i].innerText.toLowerCase() === inputLetter) {
+                letters[i].classList.remove('letter');
+                letters[i].classList.add('lettersolved');
+                acierto = true;
+            }
+        }
 
-    for (let i = 0; i < letters.length; i++) {
-        if (letters[i].innerText.toLowerCase() === inputLetter) {
-            letters[i].classList.remove('letter');
-            letters[i].classList.add('lettersolved');
-            acierto=true;
-            
-            
-        }
-        
-        }
         lettersUsed.push(inputLetter);
-        updateDivUsedLetters(); 
+        updateDivUsedLetters();
         console.log(lettersUsed);
-        
 
-        if(inputLetter===word){
-            console.log('has ganado');
+        if (acierto) {
+            // Incrementar el contador de aciertos por cada ocurrencia de la letra acertada
+            const occurrences = Array.from(letters).filter(letter => letter.classList.contains('lettersolved')).length;
+            success += occurrences;
+            console.log('aciertos: ' + success);
+        } else {
+            misses++;
+            updatehangman(misses);
+            console.log('fallos: ' + misses);
+        }
+
+        if(success === wordSize){    // meter aqui funcion para acabar el jueguito
+            console.log('¡Has ganado!');
+        }
+
+        if (inputLetter === word) {
+            console.log('¡Has ganado!');
             letters.forEach(letter => {
                 letter.classList.remove('letter');
                 letter.classList.add('lettersolved');
-                success=word.length;
-                acierto=true;
-                updateDivUsedLetters(); 
-                
+                success = word.length;
+                acierto = true;
+                updateDivUsedLetters();
             });
         }
-
-    if (acierto==true){
-        success++;
-        console.log('aciertos' +success);
-    }else{
-        misses++;
-        updatehangman(misses);
-      
-        console.log('fallos' +misses);
-
     }
-    document.getElementById('inputletter').value = '';
 }
-}
+
 
 function createdivusedletters(lettersUsed){
     let usedletters=document.createElement('div');
     usedletters.classList.add('usedletters');
     usedletters.innerText='Letras usadas: ' + lettersUsed;
-    document.body.appendChild(usedletters);
+    divjuego.appendChild(usedletters);
 }
 function updateDivUsedLetters() {
     let usedLettersDiv = document.querySelector('.usedletters');
@@ -110,9 +111,16 @@ function createhangman(){
     let hangman=document.createElement('div');
     hangman.classList.add('hangman');
     hangman.innerHTML = `
+    ------
+    |    
+    |   
+    |   
+    |   
+    |
+    ---------
        
    `;
-    document.body.appendChild(hangman);
+    divjuego.appendChild(hangman);
 }
 
 function updatehangman(misses){
@@ -237,3 +245,34 @@ case 8 :  hangman.innerHTML =
 }
 
 }
+
+function startGame(){
+    let start = document.querySelector('.start');
+    
+    start.classList.add('hide');
+    divjuego.classList.remove('hide');
+    divjuego.classList.add('show');
+
+
+}
+
+
+function createButtons(){
+    for (let letra = 65; letra <= 90; letra++) {
+        let letraChar = String.fromCharCode(letra);
+
+        let newbutton = document.createElement("button");
+        newbutton.classList.add('button'+letraChar);
+        newbutton.textContent = letraChar;
+        newbutton.addEventListener('click', function() {
+            checkletter(letraChar);
+            newbutton.disabled=true;
+        });
+
+        divjuego.appendChild(newbutton);
+
+
+
+}
+}
+

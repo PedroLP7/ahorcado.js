@@ -8,21 +8,28 @@
 
 </head>
 <body>
-    <button>Click para empezar de nuevo!</button>
 
-    <form onsubmit=" return false; checkLetter(inputletter);">
-
-
-
-    <label for="letra">Escribe una letra mi rey</label>
-    <input type="text" id="inputletter">
-
+    <div class="start"><button onclick="startGame();">START</button>
+    <form onsubmit="return false;">
+    <label for="">Escribe tu nombre</label>
+    <input type="text" id="inputname">
     
+    </form></div>
 
-    <button type="button" onclick="checkletter(inputletter);"></button>
-    </form>
+    <div class="juego"id="juego"name="juego">
+        <button>Click para empezar de nuevo!</button>
+
+   
     
 
     <script src="./script.js"></script>
+
+
+
+
+
+
+    </div>
+    
 </body>
 </html>

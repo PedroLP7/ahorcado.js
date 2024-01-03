@@ -83,6 +83,13 @@
     top : -300px;
     left: 70px;
   }
+.juego{
+    display: none;
+}
 
-
- 
+ .show{
+    display: block;
+ }
+ .hide{
+    display: none;
+ }
