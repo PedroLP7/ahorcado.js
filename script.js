@@ -10,6 +10,9 @@ let words = ['hola', 'mundo', 'desde', 'javascript'];  // array con las palabras
  let windiv=document.createElement('div');
  let loserDiv = document.createElement('div');
  let hangman=document.createElement('div');
+ let nombreusuario = document.getElementById('inputname');
+ let nombreusu = nombreusuario.value;    
+setCookie('username', nombreusu, 1);
  loadGame();
  
 
@@ -286,6 +289,11 @@ function createButtons(){
         let newbutton = document.createElement("button");
         newbutton.classList.add('button'+letraChar);
         newbutton.textContent = letraChar;
+        if (lettersUsed.includes(letraChar.toLowerCase())) {
+            newbutton.disabled = true;
+        }
+
+
         newbutton.addEventListener('click', function() {
             checkletter(letraChar);
             newbutton.disabled=true;
@@ -316,6 +324,7 @@ function showWinDiv(){
     windiv.classList.remove('hide');
     windiv.classList.add('show');
     cleancookies();
+    
     
 }
 
@@ -361,14 +370,14 @@ function getCookie(name) {
 
 
 
-function disableUsedButtons() {
-    for (let letra of lettersUsed) {
-        const button = document.querySelector('.button' + letra);
-        if (button) {
-            button.disabled = true;
-        }
-    }
-}
+// function disableUsedButtons() {
+//     for (let letra of lettersUsed) {
+//         const button = document.querySelector('.button' + letra.toLowerCase); // Asegúrate de que la letra esté en minúsculas
+//         if (button) {
+//             button.disabled = true;
+//         }
+//     }
+// }
 
 
 function loadGame() {
@@ -405,7 +414,7 @@ function loadGame() {
                 letters[i].classList.add('lettersolved');
             }
         // Deshabilitar los botones de letras ya usadas
-        disableUsedButtons();
+        // disableUsedButtons();
     }
     }
 }
@@ -414,6 +423,7 @@ function cleancookies() {
     document.cookie = 'GuessedLetters=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     document.cookie = 'missesguesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     document.cookie = 'successfulGuesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     loadGame();
 }
 
