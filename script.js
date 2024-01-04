@@ -2,20 +2,44 @@
 let words = ['hola', 'mundo', 'desde', 'javascript'];  // array con las palabras
 
 
- let word=selectRandomWord(words);   //elige la palabra random y la guarda en una variable
+ let word;  //elige la palabra random y la guarda en una variable
  let success=0;
  let misses=0;
  let lettersUsed=[];
  let divjuego = document.querySelector('.juego');
+ let windiv=document.createElement('div');
+ let loserDiv = document.createElement('div');
+ let hangman=document.createElement('div');
+ loadGame();
+ 
 
-createElementWord(word);   //crea el div de la palabra y las letras :D
+ // If there's no saved word, select a random word
+ if (!word) {
+     word = selectRandomWord(words);
+     setCookie('chosenWord', word, 1);
+     createElementWord(word);   //crea el div de la palabra y las letras :D
 
-createdivusedletters(lettersUsed);  // crea el div donde se va a guardar las letras usadas
+
+
+     createhangman(); //crea el div del ahorcado
+    createdivusedletters(lettersUsed);  // crea el div donde se va a guardar las letras usadas
+  
+  
+     createButtons(); //crea los botones de las letras
+    createWinDiv(); //crea el div de fin de juego
+    createLoseDiv(); //crea el div de fin de juego
 
 
 
-createhangman(); //crea el div del ahorcado
-createButtons(); //crea los botones de las letras
+
+
+
+ }
+
+
+ 
+
+
 
 function createElementWord(word) {
     let palabra = document.createElement('div');
@@ -45,6 +69,7 @@ function selectRandomWord(words) {
 }
 
 function checkletter(input) {
+    
     let acierto = false;
     let inputLetter = input.toLowerCase();
     let letters = document.querySelectorAll('.letter');
@@ -66,30 +91,34 @@ function checkletter(input) {
         console.log(lettersUsed);
 
         if (acierto) {
+            
+            
+            
+            setCookie('GuessedLetters', lettersUsed.join(','), 1);
             // Incrementar el contador de aciertos por cada ocurrencia de la letra acertada
             const occurrences = Array.from(letters).filter(letter => letter.classList.contains('lettersolved')).length;
             success += occurrences;
             console.log('aciertos: ' + success);
+            setCookie('successfulGuesses', success, 1);
         } else {
             misses++;
+            setCookie('GuessedLetters', lettersUsed.join(','), 1);
+            setCookie('missesguesses', misses, 1);
             updatehangman(misses);
             console.log('fallos: ' + misses);
         }
 
         if(success === wordSize){    // meter aqui funcion para acabar el jueguito
             console.log('¡Has ganado!');
+            showWinDiv();
         }
+        if (misses === 7) {
+            console.log('¡Has perdido! antonio');
+            showLoserDiv();
+        }
+       
 
-        if (inputLetter === word) {
-            console.log('¡Has ganado!');
-            letters.forEach(letter => {
-                letter.classList.remove('letter');
-                letter.classList.add('lettersolved');
-                success = word.length;
-                acierto = true;
-                updateDivUsedLetters();
-            });
-        }
+       
     }
 }
 
@@ -104,13 +133,14 @@ function updateDivUsedLetters() {
     let usedLettersDiv = document.querySelector('.usedletters');
     usedLettersDiv.innerText ='Letras usadas: ' + lettersUsed.join(', ');
 }
-document.querySelector('button').addEventListener('click', checkletter);
+
 
 
 function createhangman(){
-    let hangman=document.createElement('div');
+    
     hangman.classList.add('hangman');
     hangman.innerHTML = `
+
     ------
     |    
     |   
@@ -124,25 +154,15 @@ function createhangman(){
 }
 
 function updatehangman(misses){
-    let hangman=document.querySelector('.hangman');
+    
 
 
     switch(misses){
     
-        case 1 :  hangman.innerHTML = 
-        `
+    
+  
 
-    ------
-    |    
-    |   
-    |   
-    |   
-    |
-    ---------
-      `; 
-     break;
-
-     case 2 :  hangman.innerHTML = 
+     case 1 :  hangman.innerHTML = 
      `
 
     ------
@@ -157,7 +177,7 @@ function updatehangman(misses){
 
 
 
-    case 3 :  hangman.innerHTML = 
+    case 2 :  hangman.innerHTML = 
     `
 
     ------
@@ -171,7 +191,7 @@ function updatehangman(misses){
    break;
 
 
-   case 4:  hangman.innerHTML = 
+   case 3:  hangman.innerHTML = 
    `
 
     ------
@@ -184,7 +204,7 @@ function updatehangman(misses){
    `;
  break;
  
- case 5:  hangman.innerHTML = 
+ case 4:  hangman.innerHTML = 
  `
 
     ------
@@ -198,7 +218,7 @@ function updatehangman(misses){
 break;
 
 
-case 6:  hangman.innerHTML = 
+case 5:  hangman.innerHTML = 
 
 `
 
@@ -212,7 +232,7 @@ case 6:  hangman.innerHTML =
     `;
 break;
 
-case 7 :  hangman.innerHTML = 
+case 6 :  hangman.innerHTML = 
 `
 
     ------
@@ -225,7 +245,7 @@ case 7 :  hangman.innerHTML =
     `;
 break;
  
-case 8 :  hangman.innerHTML = 
+case 7 :  hangman.innerHTML = 
 
 `
 
@@ -248,6 +268,8 @@ case 8 :  hangman.innerHTML =
 
 function startGame(){
     let start = document.querySelector('.start');
+   
+    
     
     start.classList.add('hide');
     divjuego.classList.remove('hide');
@@ -275,4 +297,124 @@ function createButtons(){
 
 }
 }
+
+
+function createWinDiv(){
+    
+    windiv.classList.add('hide');
+    windiv.innerHTML=`
+    <h1>¡HAS GANADO!</h1>
+    <button onclick="location.reload()">Volver a jugar</button>
+    `;
+    document.body.appendChild(windiv);
+}
+
+function showWinDiv(){
+    
+    divjuego.classList.remove('show');
+    divjuego.classList.add('hide');
+    windiv.classList.remove('hide');
+    windiv.classList.add('show');
+    cleancookies();
+    
+}
+
+
+function createLoseDiv(){
+  
+    loserDiv.classList.add('hide');
+    loserDiv.innerHTML=`
+    <h1>¡HAS PERDIDO!</h1>
+    <button onclick="location.reload()">Volver a jugar</button>
+    `;
+    document.body.appendChild(loserDiv);
+}
+
+function showLoserDiv(){
+    
+    divjuego.classList.remove('show');
+    divjuego.classList.add('hide');
+    loserDiv.classList.remove('hide');
+    loserDiv.classList.add('show');
+    cleancookies();
+   
+}
+   
+
+function setCookie(name, value, days) {
+    const expires = new Date();
+    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
+    document.cookie = name + '=' + value + ';expires=' + expires.toUTCString();
+}
+
+function getCookie(name) {
+    const cookies = document.cookie.split(';');
+    for (let cookie of cookies) {
+        const [cookieName, cookieValue] = cookie.split('=');
+        if (cookieName.trim() === name) {
+            return cookieValue;
+        }
+    }
+    return null;
+}
+
+
+
+
+function disableUsedButtons() {
+    for (let letra of lettersUsed) {
+        const button = document.querySelector('.button' + letra);
+        if (button) {
+            button.disabled = true;
+        }
+    }
+}
+
+
+function loadGame() {
+    // Verificar si existen cookies relevantes
+    let chosenWord = getCookie('chosenWord');
+    let guessedLetters = getCookie('GuessedLetters');
+    let successfulGuesses = parseInt(getCookie('successfulGuesses')) || 0;
+    let missesguesses = parseInt(getCookie('missesguesses')) || 0;
+
+    // Si hay datos guardados, actualizar las variables del juego
+    if (chosenWord && guessedLetters !== null && !isNaN(successfulGuesses) && !isNaN(misses)) {
+        word = chosenWord;
+        lettersUsed = guessedLetters.split(',');
+        success = successfulGuesses;
+        misses = missesguesses;
+        
+        // Actualizar elementos en la interfaz según los datos cargados
+        createElementWord(word);   //crea el div de la palabra y las letras :D
+
+
+
+        createhangman(); //crea el div del ahorcado
+        createdivusedletters(lettersUsed);  // crea el div donde se va a guardar las letras usadas
+        updatehangman(misses);
+        
+        
+        createButtons(); //crea los botones de las letras
+        createWinDiv(); //crea el div de fin de juego
+        createLoseDiv(); //crea el div de fin de juego
+        const letters = document.querySelectorAll('.letter');
+        for (let i = 0; i < letters.length; i++) {
+            if (lettersUsed.includes(letters[i].innerText.toLowerCase())) {
+                letters[i].classList.remove('letter');
+                letters[i].classList.add('lettersolved');
+            }
+        // Deshabilitar los botones de letras ya usadas
+        disableUsedButtons();
+    }
+    }
+}
+function cleancookies() {
+    document.cookie = 'chosenWord=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'GuessedLetters=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'missesguesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'successfulGuesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    loadGame();
+}
+
 
