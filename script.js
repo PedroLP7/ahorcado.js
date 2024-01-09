@@ -1,9 +1,9 @@
 
 
-let transportes = ['Avión', 'Barco', 'Globo', 'Bicicleta', 'Coche', 'Tren', 'Barca', 'Helicoptero', 'Patinete', 'Submarino'];
+let transportes = ['Avion', 'Barco', 'Globo', 'Bicicleta', 'Coche', 'Tren', 'Barca', 'Helicoptero', 'Patinete', 'Submarino'];
 
 
-let animales = ['Elefante', 'Jirafa', 'Tigre', 'León', 'Mariposa', 'Ballena', 'Delfín', 'Mono', 'Tortuga', 'Canguro'];
+let animales = ['Elefante', 'Jirafa', 'Tigre', 'Leon', 'Mariposa', 'Ballena', 'Delfin', 'Mono', 'Tortuga', 'Canguro'];
 
 
 let lugares = ['Montaña', 'Playa', 'Isla', 'Selva', 'Desierto', 'Pirámide', 'Castillo', 'Ciudad', 'Parque', 'Espacio'];
@@ -33,17 +33,21 @@ setCookie('username', nombreusu, 1);
     let arraySeleccionado=selectRandomArray([transportes,animales,lugares]);
 words=arraySeleccionado;
 if (transportes === words) {
+    setCookie('categoria', 'transportes', 1);
    
     pista='transportes';
+    
     console.log(pista);
     
 }else if (words === animales) {
 
     pista='animales';
+    setCookie('categoria', 'animales', 1);
     console.log(pista);
 }
 else if (words === lugares) {
     
+    setCookie('categoria', 'lugares', 1);
     pista='lugares';
     console.log(pista);
 
@@ -442,6 +446,7 @@ function loadGame() {
     let successfulGuesses = parseInt(getCookie('successfulGuesses')) || 0;
     let missesguesses = parseInt(getCookie('missesguesses')) || 0;
     let tiempocokie = parseInt(getCookie('tiempo')) || 0;
+    let pistacookie = getCookie('categoria');
 
     // Si hay datos guardados, actualizar las variables del juego
     if (chosenWord && guessedLetters !== null && !isNaN(successfulGuesses) && !isNaN(misses)) {
@@ -450,6 +455,7 @@ function loadGame() {
         success = successfulGuesses;
         misses = missesguesses;
         tiempo = tiempocokie;
+        pista = pistacookie;
         
         // Actualizar elementos en la interfaz según los datos cargados
         createElementWord(word);   //crea el div de la palabra y las letras :D
@@ -464,7 +470,7 @@ function loadGame() {
         createButtons(); //crea los botones de las letras
         // createWinDiv(); //crea el div de fin de juego
         // createLoseDiv(); //crea el div de fin de juego
-        createPistaDiv
+        createPistaDiv();
         updateTimer();
         const letters = document.querySelectorAll('.letter');
         for (let i = 0; i < letters.length; i++) {
