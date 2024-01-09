@@ -1,5 +1,12 @@
 
-let words = ['hola', 'mundo', 'desde', 'javascript'];  // array con las palabras
+
+let transportes = ['Avión', 'Barco', 'Globo', 'Bicicleta', 'Coche', 'Tren', 'Barca', 'Helicoptero', 'Patinete', 'Submarino'];
+
+
+let animales = ['Elefante', 'Jirafa', 'Tigre', 'León', 'Mariposa', 'Ballena', 'Delfín', 'Mono', 'Tortuga', 'Canguro'];
+
+
+let lugares = ['Montaña', 'Playa', 'Isla', 'Selva', 'Desierto', 'Pirámide', 'Castillo', 'Ciudad', 'Parque', 'Espacio'];
 
 
  let word;  //elige la palabra random y la guarda en una variable
@@ -12,33 +19,74 @@ let words = ['hola', 'mundo', 'desde', 'javascript'];  // array con las palabras
  let hangman=document.createElement('div');
  let nombreusuario = document.getElementById('inputname');
  let nombreusu = nombreusuario.value;    
+ let tiempo=0;
+ let pista;
+ const erroresMaximos =7;
+ 
 setCookie('username', nombreusu, 1);
+
  loadGame();
  
 
- // If there's no saved word, select a random word
+ 
  if (!word) {
+    let arraySeleccionado=selectRandomArray([transportes,animales,lugares]);
+words=arraySeleccionado;
+if (transportes === words) {
+   
+    pista='transportes';
+    console.log(pista);
+    
+}else if (words === animales) {
+
+    pista='animales';
+    console.log(pista);
+}
+else if (words === lugares) {
+    
+    pista='lugares';
+    console.log(pista);
+
+}
+ 
+
+    // createTimer();
      word = selectRandomWord(words);
      setCookie('chosenWord', word, 1);
      createElementWord(word);   //crea el div de la palabra y las letras :D
 
-
+  createPistaDiv();
 
      createhangman(); //crea el div del ahorcado
     createdivusedletters(lettersUsed);  // crea el div donde se va a guardar las letras usadas
   
   
      createButtons(); //crea los botones de las letras
-    createWinDiv(); //crea el div de fin de juego
-    createLoseDiv(); //crea el div de fin de juego
+    // createWinDiv(); //crea el div de fin de juego
+    // createLoseDiv(); //crea el div de fin de juego
+ updateTimer();
+
+}
+// createPistaDiv();
 
 
 
 
-
-
+ function createTimer(){
+    
+    let timer=document.createElement('div');
+    timer.classList.add('timer');
+    timer.innerText=tiempo;
+    divjuego.appendChild(timer);
+    
  }
-
+ function updateTimer(){
+    setCookie('tiempo', tiempo, 1);
+    let timer=document.querySelector('.timer');
+    timer.innerText=tiempo;
+    tiempo++;
+    setTimeout(updateTimer,1000);
+ }
 
  
 
@@ -113,10 +161,12 @@ function checkletter(input) {
 
         if(success === wordSize){    // meter aqui funcion para acabar el jueguito
             console.log('¡Has ganado!');
+            createWinDiv();
             showWinDiv();
         }
-        if (misses === 7) {
+        if (misses === erroresMaximos) {
             console.log('¡Has perdido! antonio');
+            createLoseDiv();
             showLoserDiv();
         }
        
@@ -312,9 +362,12 @@ function createButtons(){
 function createWinDiv(){
     
     windiv.classList.add('hide');
+    windiv.classList.add('finales');
     windiv.innerHTML=`
     <h1>¡HAS GANADO!</h1>
-    <button onclick="location.reload()">Volver a jugar</button>
+    <p>La palabra era: ${word} y has tardado ${tiempo} segundos  en completarlo</p>
+
+    <button  class="finalbuttons"onclick="location.reload()">Volver a jugar</button>
     `;
     document.body.appendChild(windiv);
 }
@@ -332,12 +385,17 @@ function showWinDiv(){
 
 
 function createLoseDiv(){
+    
   
     loserDiv.classList.add('hide');
+    loserDiv.classList.add('finales');
     loserDiv.innerHTML=`
     <h1>¡HAS PERDIDO!</h1>
-    <button onclick="location.reload()">Volver a jugar</button>
+    
+    <p>La palabra era: ${word.toUpperCase()}, intentalo otra vez!</p>
+    <button  class="finalbuttons" onclick="location.reload()">Volver a jugar</button>
     `;
+
     document.body.appendChild(loserDiv);
 }
 
@@ -372,22 +430,18 @@ function getCookie(name) {
 
 
 
-// function disableUsedButtons() {
-//     for (let letra of lettersUsed) {
-//         const button = document.querySelector('.button' + letra.toLowerCase); // Asegúrate de que la letra esté en minúsculas
-//         if (button) {
-//             button.disabled = true;
-//         }
-//     }
-// }
+
+
 
 
 function loadGame() {
+    createTimer();
     // Verificar si existen cookies relevantes
     let chosenWord = getCookie('chosenWord');
     let guessedLetters = getCookie('GuessedLetters');
     let successfulGuesses = parseInt(getCookie('successfulGuesses')) || 0;
     let missesguesses = parseInt(getCookie('missesguesses')) || 0;
+    let tiempocokie = parseInt(getCookie('tiempo')) || 0;
 
     // Si hay datos guardados, actualizar las variables del juego
     if (chosenWord && guessedLetters !== null && !isNaN(successfulGuesses) && !isNaN(misses)) {
@@ -395,28 +449,30 @@ function loadGame() {
         lettersUsed = guessedLetters.split(',');
         success = successfulGuesses;
         misses = missesguesses;
+        tiempo = tiempocokie;
         
         // Actualizar elementos en la interfaz según los datos cargados
         createElementWord(word);   //crea el div de la palabra y las letras :D
 
 
-
+        
         createhangman(); //crea el div del ahorcado
         createdivusedletters(lettersUsed);  // crea el div donde se va a guardar las letras usadas
         updatehangman(misses);
         
         
         createButtons(); //crea los botones de las letras
-        createWinDiv(); //crea el div de fin de juego
-        createLoseDiv(); //crea el div de fin de juego
+        // createWinDiv(); //crea el div de fin de juego
+        // createLoseDiv(); //crea el div de fin de juego
+        createPistaDiv
+        updateTimer();
         const letters = document.querySelectorAll('.letter');
         for (let i = 0; i < letters.length; i++) {
             if (lettersUsed.includes(letters[i].innerText.toLowerCase())) {
                 letters[i].classList.remove('letter');
                 letters[i].classList.add('lettersolved');
             }
-        // Deshabilitar los botones de letras ya usadas
-        // disableUsedButtons();
+        
     }
     }
 }
@@ -426,7 +482,24 @@ function cleancookies() {
     document.cookie = 'missesguesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     document.cookie = 'successfulGuesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'tiempo=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+    document.cookie = 'categoria=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
     loadGame();
 }
 
 
+
+function createPistaDiv(){
+
+    let pistadiv=document.createElement('div');
+    pistadiv.classList.add('pista');
+    pistadiv.innerText='Pista: ' + pista.toUpperCase();
+    divjuego.appendChild(pistadiv);
+}
+
+function selectRandomArray(array) {
+    let index = Math.floor(Math.random() * array.length);
+    console.log(array[index]);
+   
+    return array[index];
+}
