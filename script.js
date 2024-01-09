@@ -271,6 +271,7 @@ case 7 :  hangman.innerHTML =
 
 function startGame(){
     let start = document.querySelector('.start');
+    start.style.display='none';
    
     
     
