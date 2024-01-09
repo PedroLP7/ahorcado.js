@@ -461,7 +461,7 @@ function loadGame() {
         createElementWord(word);   //crea el div de la palabra y las letras :D
 
 
-        
+        createPistaDiv();
         createhangman(); //crea el div del ahorcado
         createdivusedletters(lettersUsed);  // crea el div donde se va a guardar las letras usadas
         updatehangman(misses);
@@ -470,7 +470,7 @@ function loadGame() {
         createButtons(); //crea los botones de las letras
         // createWinDiv(); //crea el div de fin de juego
         // createLoseDiv(); //crea el div de fin de juego
-        createPistaDiv();
+        
         updateTimer();
         const letters = document.querySelectorAll('.letter');
         for (let i = 0; i < letters.length; i++) {
