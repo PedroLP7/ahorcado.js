@@ -288,6 +288,7 @@ function createButtons(){
 
         let newbutton = document.createElement("button");
         newbutton.classList.add('button'+letraChar);
+        newbutton.classList.add('buttonsleters');
         newbutton.textContent = letraChar;
         if (lettersUsed.includes(letraChar.toLowerCase())) {
             newbutton.disabled = true;

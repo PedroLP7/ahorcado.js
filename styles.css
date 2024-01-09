@@ -64,7 +64,7 @@
    
     overflow: hidden;
     position: relative;
-    top: -250px;
+    top: -300px;
     left: 70px;
     height: 150px;
     width: 150px;
@@ -81,7 +81,7 @@
     width: 300px;
     height: 300px;
     position: relative;
-    top : -300px;
+    top : -200px;
     left: 70px;
   }
 .juego{
@@ -94,3 +94,66 @@
  .hide{
     display: none;
  }
+
+
+
+
+
+
+
+
+
+
+/* Style for game buttons */
+.buttonsleters {
+    background-color: #3498db;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    margin : 2px;
+}
+
+.buttonsleters:hover {
+    background-color: #2980b9;
+}
+
+.buttonsleters:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    color: #7f8c8d;
+}
+
+.start {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+#start {
+    
+    background-color: #2ecc71;
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    font-size: 18px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+#start:hover {
+    background-color: #27ae60;
+}
+
+#start:disabled {
+    background-color: #bdc3c7;
+    cursor: not-allowed;
+    color: #7f8c8d;
+    box-shadow: none;
+}
