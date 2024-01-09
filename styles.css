@@ -20,6 +20,7 @@
     position: relative;
     top :100px;
     left: 200px;
+    user-select: none;
     
 
 }
@@ -27,7 +28,7 @@
  
     font-size: 25px;
     font-weight: bold;
-    color: white;
+    color: transparent;
     border-bottom: 5px solid black;
     margin-right: 10px;
     
