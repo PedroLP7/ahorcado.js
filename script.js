@@ -20,12 +20,11 @@ let lugares = ['Monte', 'Playa', 'Isla', 'Selva', 'Desierto', 'Piramide', 'Casti
  let loserDiv = document.createElement('div');
  let hangman=document.createElement('div');
  let nombreusuario = document.getElementById('inputname');
- let nombreusu = nombreusuario.value;    
+  
  let tiempo=0;
  let pista;
  const erroresMaximos =7;
- 
-setCookie('username', nombreusu, 1);
+
 
  loadGame();
  
@@ -70,7 +69,7 @@ else if (words === lugares) {
      createButtons(); //crea los botones de las letras
     // createWinDiv(); //crea el div de fin de juego
     // createLoseDiv(); //crea el div de fin de juego
- updateTimer();
+
 
 }
 // createPistaDiv();
@@ -326,14 +325,17 @@ case 7 :  hangman.innerHTML =
 }
 
 function startGame(){
+    
     let start = document.querySelector('.start');
     start.style.display='none';
-   
+   updateTimer();
     
     
     start.classList.add('hide');
     divjuego.classList.remove('hide');
     divjuego.classList.add('show');
+    let nombreusu = nombreusuario.value;  
+    setCookie('username', nombreusu, 1);
 
 
 }
@@ -457,6 +459,7 @@ function loadGame() {
     let missesguesses = parseInt(getCookie('missesguesses')) || 0;
     let tiempocokie = parseInt(getCookie('tiempo')) || 0;
     let pistacookie = getCookie('categoria');
+    let usercookie = getCookie('username');
 
     // Si hay datos guardados, actualizar las variables del juego
     if (chosenWord && guessedLetters !== null && !isNaN(successfulGuesses) && !isNaN(misses)) {
@@ -481,7 +484,7 @@ function loadGame() {
         // createWinDiv(); //crea el div de fin de juego
         // createLoseDiv(); //crea el div de fin de juego
         
-        updateTimer();
+        
         const letters = document.querySelectorAll('.letter');
         for (let i = 0; i < letters.length; i++) {
             if (lettersUsed.includes(letters[i].innerText.toLowerCase())) {
@@ -493,13 +496,14 @@ function loadGame() {
     }
 }
 function cleancookies() {
-    document.cookie = 'chosenWord=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
-      document.cookie = 'GuessedLetters=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
-    document.cookie = 'missesguesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
-    document.cookie = 'successfulGuesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
-    document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
-    document.cookie = 'tiempo=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
-    document.cookie = 'categoria=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
+    setCookie('chosenWord', '', -1);
+    setCookie('GuessedLetters', '', -1);
+    setCookie('missesguesses', '0', -1);
+    setCookie('successfulGuesses', '0', -1);
+    setCookie('username', '', -1);
+    setCookie('tiempo', '0', -1);
+    setCookie('categoria', '', -1);
+    
     loadGame();
 }
 
