@@ -6,7 +6,9 @@ let transportes = ['Avion', 'Barco', 'Globo', 'Bicicleta', 'Coche', 'Tren', 'Bar
 let animales = ['Elefante', 'Jirafa', 'Tigre', 'Leon', 'Mariposa', 'Ballena', 'Delfin', 'Mono', 'Tortuga', 'Canguro'];
 
 
-let lugares = ['Montaña', 'Playa', 'Isla', 'Selva', 'Desierto', 'Pirámide', 'Castillo', 'Ciudad', 'Parque', 'Espacio'];
+let lugares = ['Monte', 'Playa', 'Isla', 'Selva', 'Desierto', 'Piramide', 'Castillo', 'Ciudad', 'Parque', 'Espacio'];
+
+
 
 
  let word;  //elige la palabra random y la guarda en una variable
@@ -354,6 +356,7 @@ function createButtons(){
             checkletter(letraChar);
             newbutton.disabled=true;
         });
+        
 
         divjuego.appendChild(newbutton);
 
@@ -364,12 +367,16 @@ function createButtons(){
 
 
 function createWinDiv(){
+    let ruta = selectImage();
+    console.log(ruta);
+    
     
     windiv.classList.add('hide');
     windiv.classList.add('finales');
     windiv.innerHTML=`
     <h1>¡HAS GANADO!</h1>
     <p>La palabra era: ${word} y has tardado ${tiempo} segundos  en completarlo</p>
+    <img src="${ruta}" alt="ruta" class="imagenfinal">
 
     <button  class="finalbuttons"onclick="location.reload()">Volver a jugar</button>
     `;
@@ -389,6 +396,8 @@ function showWinDiv(){
 
 
 function createLoseDiv(){
+    let ruta = selectImage();
+    console.log(ruta);
     
   
     loserDiv.classList.add('hide');
@@ -397,6 +406,7 @@ function createLoseDiv(){
     <h1>¡HAS PERDIDO!</h1>
     
     <p>La palabra era: ${word.toUpperCase()}, intentalo otra vez!</p>
+    <img src="${ruta}" alt="ruta" class="imagenfinal">
     <button  class="finalbuttons" onclick="location.reload()">Volver a jugar</button>
     `;
 
@@ -508,4 +518,45 @@ function selectRandomArray(array) {
     console.log(array[index]);
    
     return array[index];
+}
+
+
+
+// objeto que une las palabras con las imagenes
+function selectImage() {
+    const imgsrc = {
+        'avion': './img/avion.png',
+        'barco': './img/barco.png',
+        'globo': './img/globo.png',
+        'bicicleta': './img/bicicleta.png',
+        'coche': './img/coche.png',
+        'tren': './img/tren.png',
+        'barca': './img/barca.png',
+        'helicoptero': './img/helicoptero.png',
+        'patinete': './img/patinete.png',
+        'submarino': './img/submarino.png',
+        'elefante': './img/elefante.png',
+        'jirafa': './img/jirafa.png',
+        'tigre': './img/tigre.png',
+        'leon': './img/leon.png',
+        'mariposa': './img/mariposa.png',
+        'ballena': './img/ballena.png',
+        'delfin': './img/delfin.png',
+        'mono': './img/mono.png',
+        'tortuga': './img/tortuga.png',
+        'canguro': './img/canguro.png',
+        'monte': './img/monte.png',
+        'playa': './img/playa.png',
+        'isla': './img/isla.png',
+        'selva': './img/selva.png',
+        'desierto': './img/desierto.png',
+        'piramide': './img/piramide.png',
+        'castillo': './img/castillo.png',
+        'ciudad': './img/ciudad.png',
+        'parque': './img/parque.png',
+        'espacio': './img/espacio.png'
+    };
+
+    const lowercaseWord = word.toLowerCase();
+    return imgsrc[lowercaseWord];
 }

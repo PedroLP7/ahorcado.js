@@ -229,6 +229,9 @@ font-family: 'arial', sans-serif;
     transition: background-color 0.3s;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     margin : 5px;
+    position : relative;
+    right :210px;
+    top :-30px;
 
 
 }
@@ -236,6 +239,7 @@ font-family: 'arial', sans-serif;
 body{
 
 background-color: #c6cccf;
+user-select: none;
 
 }
 
@@ -245,4 +249,15 @@ background-color: #c6cccf;
     position: relative;
     left : 450px;
     bottom: 315px;
+}
+
+
+.imagenfinal{
+  height: 200px;
+  width: 200px;
+  position: relative;
+    left: 280px;
+    top : 0px;
+
+
 }
