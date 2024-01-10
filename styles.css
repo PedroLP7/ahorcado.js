@@ -198,6 +198,8 @@ font-family: 'arial', sans-serif;
     top: 100px;
     left : 700px;
     justify-content: center;
+   font-size: 12px;
+   font-weight: bold;
     
     margin-top: 2%;
     
@@ -261,3 +263,4 @@ user-select: none;
 
 
 }
+

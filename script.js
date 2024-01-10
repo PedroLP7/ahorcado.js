@@ -368,6 +368,8 @@ function createButtons(){
 
 
 function createWinDiv(){
+    let  frase = selectPhrase(word);
+    console.log(frase);
     let ruta = selectImage();
     console.log(ruta);
     
@@ -375,8 +377,9 @@ function createWinDiv(){
     windiv.classList.add('hide');
     windiv.classList.add('finales');
     windiv.innerHTML=`
-    <h1>¡HAS GANADO!</h1>
-    <p>La palabra era: ${word} y has tardado ${tiempo} segundos  en completarlo</p>
+    <h2>¡HAS GANADO!</h2>
+    <p>La palabra era: ${word} y has tardado ${tiempo} segundos  en completarlo.</p>
+    <p>${frase}</p>
     <img src="${ruta}" alt="ruta" class="imagenfinal">
 
     <button  class="finalbuttons"onclick="location.reload()">Volver a jugar</button>
@@ -398,6 +401,7 @@ function showWinDiv(){
 
 
 function createLoseDiv(){
+    let  frase = selectPhrase(word);
     let ruta = selectImage();
     console.log(ruta);
     
@@ -408,6 +412,7 @@ function createLoseDiv(){
     <h1>¡HAS PERDIDO!</h1>
     
     <p>La palabra era: ${word.toUpperCase()}, intentalo otra vez!</p>
+    <p>${frase}</p>
     <img src="${ruta}" alt="ruta" class="imagenfinal">
     <button  class="finalbuttons" onclick="location.reload()">Volver a jugar</button>
     `;
@@ -565,3 +570,43 @@ function selectImage() {
     const lowercaseWord = word.toLowerCase();
     return imgsrc[lowercaseWord];
 }
+
+
+function selectPhrase() {
+    const txtfinal = {
+        'avion': 'Los aviones vuelan alto en el cielo, transportando pasajeros y mercancías de un lugar a otro.',
+        'barco': 'Los barcos surcan mares y océanos, facilitando el comercio y la conexión entre diferentes regiones.',
+        'globo': 'Los globos aerostáticos flotan majestuosamente en el aire, ofreciendo vistas panorámicas desde las alturas.',
+        'bicicleta': 'Las bicicletas son una opción saludable y divertida de transporte, ideal para hacer ejercicio al aire libre.',
+        'coche': 'Los coches nos llevan a lugares lejanos con rapidez, haciendo que viajar sea conveniente y emocionante.',
+        'tren': 'Los trenes recorren distancias largas sobre rieles, conectando ciudades y facilitando el transporte masivo.',
+        'barca': 'Las barcas son embarcaciones pequeñas ideales para explorar ríos y lagos de manera tranquila.',
+        'helicoptero': 'Los helicópteros despegan y aterrizan verticalmente, facilitando el acceso a lugares de difícil alcance.',
+        'patinete': 'Los patinetes son una forma divertida y ecológica de moverse por la ciudad y disfrutar del aire libre.',
+        'submarino': 'Los submarinos exploran las profundidades del océano, revelando secretos submarinos y estudiando la vida marina.',
+        'elefante': 'Los elefantes son animales majestuosos y sociales, viviendo en manadas y siendo conocidos por su inteligencia.',
+        'jirafa': 'Las jirafas tienen cuellos largos que les permiten alcanzar hojas en lo alto de los árboles, son asombrosas criaturas.',
+        'tigre': 'Los tigres son felinos poderosos que cazan con destreza en la selva, siendo vitales para el equilibrio del ecosistema.',
+        'leon': 'Los leones son los reyes de la selva, viviendo en manadas y siendo conocidos por su melena y fuerte rugido.',
+        'mariposa': 'Las mariposas son coloridas y delicadas, transformándose desde orugas en capullos para luego volar libremente.',
+        'ballena': 'Las ballenas son gigantes del océano, nadando largas distancias y comunicándose a través de sonidos complejos.',
+        'delfin': 'Los delfines son inteligentes y juguetones, disfrutando de la compañía de su grupo y realizando acrobacias en el agua.',
+        'mono': 'Los monos son animales curiosos y ágiles que viven en selvas y bosques, utilizando sus habilidades para moverse entre ramas.',
+        'tortuga': 'Las tortugas llevan sus cascos a todas partes, protegiéndolas mientras exploran la tierra y nadan en el agua.',
+        'canguro': 'Los canguros son marsupiales saltarines que viven en Australia, llevando a sus crías en una bolsa especial.',
+        'monte': 'Los montes son elevaciones naturales de la tierra, ofreciendo vistas panorámicas y siendo el hogar de diversos ecosistemas.',
+        'playa': 'Las playas son lugares hermosos donde la arena se encuentra con el mar, proporcionando un entorno relajante y divertido.',
+        'isla': 'Las islas son porciones de tierra rodeadas de agua, con su propia flora y fauna, ideales para la exploración y la aventura.',
+        'selva': 'Las selvas tropicales son ecosistemas exuberantes y llenos de vida, albergando una diversidad increíble de plantas y animales.',
+        'desierto': 'Los desiertos son vastas extensiones de tierra seca y arenosa, con paisajes impresionantes y adaptaciones únicas de la vida.',
+        'piramide': 'Las pirámides son estructuras antiguas construidas por civilizaciones pasadas, llenas de misterio y significado histórico.',
+        'castillo': 'Los castillos son fortalezas imponentes construidas para proteger a la realeza, llenos de historia y arquitectura impresionante.',
+        'ciudad': 'Las ciudades son centros bulliciosos de actividad humana, con edificios altos, calles animadas y diversas oportunidades.',
+        'parque': 'Los parques son espacios verdes donde las personas pueden disfrutar de la naturaleza, hacer ejercicio y relajarse.',
+        'espacio': 'El espacio es vasto y misterioso, lleno de estrellas, planetas y galaxias, ofreciendo un infinito para la exploración y la maravilla.'
+    };
+
+    const lowercaseWord = word.toLowerCase();
+    return txtfinal[lowercaseWord];
+}
+
