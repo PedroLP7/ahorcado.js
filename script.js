@@ -389,7 +389,7 @@ function showWinDiv(){
     divjuego.classList.add('hide');
     windiv.classList.remove('hide');
     windiv.classList.add('show');
-     cleancookies();
+    cleancookies();
     
     
 }
@@ -419,7 +419,7 @@ function showLoserDiv(){
     divjuego.classList.add('hide');
     loserDiv.classList.remove('hide');
     loserDiv.classList.add('show');
-     cleancookies();
+    cleancookies();
    
 }
    
@@ -493,17 +493,13 @@ function loadGame() {
     }
 }
 function cleancookies() {
-    const domain = window.location.hostname;
-    console.log(domain);
-
-    document.cookie = 'chosenWord=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain + '; SameSite=None; Secure';
-    document.cookie = 'GuessedLetters=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain + '; SameSite=None; Secure';
-    document.cookie = 'missesguesses=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain + '; SameSite=None; Secure';
-    document.cookie = 'successfulGuesses=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain + '; SameSite=None; Secure';
-    document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain + '; SameSite=None; Secure';
-    document.cookie = 'tiempo=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain + '; SameSite=None; Secure';
-    document.cookie = 'categoria=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain + '; SameSite=None; Secure';
-
+    document.cookie = 'chosenWord=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
+      document.cookie = 'GuessedLetters=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
+    document.cookie = 'missesguesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
+    document.cookie = 'successfulGuesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
+    document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
+    document.cookie = 'tiempo=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
+    document.cookie = 'categoria=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
     loadGame();
 }
 
