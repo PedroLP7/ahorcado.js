@@ -70,7 +70,7 @@ else if (words === lugares) {
      createButtons(); //crea los botones de las letras
     // createWinDiv(); //crea el div de fin de juego
     // createLoseDiv(); //crea el div de fin de juego
- updateTimer();
+ 
 
 }
 // createPistaDiv();
@@ -328,6 +328,7 @@ case 7 :  hangman.innerHTML =
 function startGame(){
     let start = document.querySelector('.start');
     start.style.display='none';
+    updateTimer();
    
     
     
@@ -481,7 +482,7 @@ function loadGame() {
         // createWinDiv(); //crea el div de fin de juego
         // createLoseDiv(); //crea el div de fin de juego
         
-        updateTimer();
+        
         const letters = document.querySelectorAll('.letter');
         for (let i = 0; i < letters.length; i++) {
             if (lettersUsed.includes(letters[i].innerText.toLowerCase())) {
