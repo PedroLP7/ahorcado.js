@@ -585,7 +585,7 @@ function selectPhrase() {
         'patinete': 'Los patinetes son una forma divertida y ecológica de moverse por la ciudad y disfrutar del aire libre.',
         'submarino': 'Los submarinos exploran las profundidades del océano, revelando secretos submarinos y estudiando la vida marina.',
         'elefante': 'Los elefantes son animales majestuosos y sociales, viviendo en manadas y siendo conocidos por su inteligencia.',
-        'jirafa': 'Las jirafas tienen cuellos largos que les permiten alcanzar hojas en lo alto de los árboles, son asombrosas criaturas.',
+        'jirafa': 'Las jirafas tienen cuellos largos que les permiten alcanzar hojas en lo alto de los árboles, son criaturas asombrosas.',
         'tigre': 'Los tigres son felinos poderosos que cazan con destreza en la selva, siendo vitales para el equilibrio del ecosistema.',
         'leon': 'Los leones son los reyes de la selva, viviendo en manadas y siendo conocidos por su melena y fuerte rugido.',
         'mariposa': 'Las mariposas son coloridas y delicadas, transformándose desde orugas en capullos para luego volar libremente.',
