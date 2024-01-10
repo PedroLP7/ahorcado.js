@@ -378,7 +378,7 @@ function createWinDiv(){
     <p>La palabra era: ${word} y has tardado ${tiempo} segundos  en completarlo</p>
     <img src="${ruta}" alt="ruta" class="imagenfinal">
 
-    <button  class="finalbuttons"onclick=" cleancookies(); location.reload()">Volver a jugar</button>
+    <button  class="finalbuttons"onclick="location.reload()">Volver a jugar</button>
     `;
     document.body.appendChild(windiv);
 }
@@ -389,7 +389,7 @@ function showWinDiv(){
     divjuego.classList.add('hide');
     windiv.classList.remove('hide');
     windiv.classList.add('show');
-    // cleancookies();
+     cleancookies();
     
     
 }
@@ -419,7 +419,7 @@ function showLoserDiv(){
     divjuego.classList.add('hide');
     loserDiv.classList.remove('hide');
     loserDiv.classList.add('show');
-    // cleancookies();
+     cleancookies();
    
 }
    
