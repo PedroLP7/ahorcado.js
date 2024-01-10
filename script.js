@@ -522,8 +522,9 @@ function selectRandomArray(array) {
 
 
 
-// objeto que une las palabras con las imagenes
+
 function selectImage() {
+    // objeto que une las palabras con las imagenes
     const imgsrc = {
         'avion': './img/avion.png',
         'barco': './img/barco.png',
