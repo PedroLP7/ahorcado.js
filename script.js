@@ -493,13 +493,14 @@ function loadGame() {
     }
 }
 function cleancookies() {
-    document.cookie = 'chosenWord=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
-      document.cookie = 'GuessedLetters=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
-    document.cookie = 'missesguesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
-    document.cookie = 'successfulGuesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
-    document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
-    document.cookie = 'tiempo=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
-    document.cookie = 'categoria=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; ';
+    setCookie('chosenWord', '', -1);
+    setCookie('GuessedLetters', '', -1);
+    setCookie('missesguesses', '0', -1);
+    setCookie('successfulGuesses', '0', -1);
+    setCookie('username', '', -1);
+    setCookie('tiempo', '0', -1);
+    setCookie('categoria', '', -1);
+    
     loadGame();
 }
 
