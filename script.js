@@ -495,13 +495,13 @@ function loadGame() {
 function cleancookies() {
     const domain = window.location.hostname;
     console.log(domain);
-    document.cookie = 'chosenWord; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
-      document.cookie = 'GuessedLetters; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
-    document.cookie = 'missesguesses; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
-    document.cookie = 'successfulGuesses; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
-    document.cookie = 'username; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
-    document.cookie = 'tiempo; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
-    document.cookie = 'categoria; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
+    document.cookie = 'chosenWord=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
+      document.cookie = 'GuessedLetters=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
+    document.cookie = 'missesguesses=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
+    document.cookie = 'successfulGuesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
+    document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
+    document.cookie = 'tiempo=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
+    document.cookie = 'categoria=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + domain;
     loadGame();
 }
 
