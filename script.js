@@ -393,6 +393,7 @@ function showWinDiv(){
     cleancookies();
     
     
+    
 }
 
 
@@ -421,6 +422,7 @@ function showLoserDiv(){
     loserDiv.classList.remove('hide');
     loserDiv.classList.add('show');
     cleancookies();
+   
    
 }
    
