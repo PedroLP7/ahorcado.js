@@ -493,7 +493,7 @@ function loadGame() {
     }
 }
 function cleancookies() {
-    document.cookie = 'chosenWord=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=' + document.location.hostname;
+    document.cookie = 'chosenWord=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=" + document.location.hostname"';
 
     document.cookie = 'GuessedLetters=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=pedrolp7.github.io';
     document.cookie = 'missesguesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=pedrolp7.github.io';
