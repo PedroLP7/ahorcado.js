@@ -497,9 +497,9 @@ function cleancookies() {
     document.cookie = 'GuessedLetters=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=pedrolp7.github.io';
     document.cookie = 'missesguesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=pedrolp7.github.io';
     document.cookie = 'successfulGuesses=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=pedrolp7.github.io';
-    document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; omain=pedrolp7.github.io';
+    document.cookie = 'username=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=pedrolp7.github.io';
     document.cookie = 'tiempo=0; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=pedrolp7.github.io';
-    document.cookie = 'categoria=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; Domain:"pedrolp7.github.io"';
+    document.cookie = 'categoria=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=pedrolp7.github.io';
     loadGame();
 }
 
