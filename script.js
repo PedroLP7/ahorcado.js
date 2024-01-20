@@ -443,14 +443,6 @@ function showLoserDiv(){
 }
    
 
-
-
-
-
-
-
-
-
 function loadGame() {
     createTimer();
     // Verificar si hay localstorage disponible
