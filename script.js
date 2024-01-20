@@ -26,6 +26,7 @@ let lugares = ['Monte', 'Playa', 'Isla', 'Selva', 'Desierto', 'Piramide', 'Casti
  const erroresMaximos =7;
  
 setCookie('username', nombreusu, 1);
+localStorage.setItem('username', nombreusu);
 
  loadGame();
  
