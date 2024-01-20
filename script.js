@@ -25,7 +25,7 @@ let lugares = ['Monte', 'Playa', 'Isla', 'Selva', 'Desierto', 'Piramide', 'Casti
  let pista;
  const erroresMaximos =7;
  
-setCookie('username', nombreusu, 1);
+
 localStorage.setItem('username', nombreusu);
 
  loadGame();
@@ -36,7 +36,8 @@ localStorage.setItem('username', nombreusu);
     let arraySeleccionado=selectRandomArray([transportes,animales,lugares]);
 words=arraySeleccionado;
 if (transportes === words) {
-    setCookie('categoria', 'transportes', 1);
+   
+    localStorage.setItem('categoria', 'transportes');
    
     pista='transportes';
     
@@ -45,12 +46,14 @@ if (transportes === words) {
 }else if (words === animales) {
 
     pista='animales';
-    setCookie('categoria', 'animales', 1);
+   
+    localStorage.setItem('categoria', 'animales');
     console.log(pista);
 }
 else if (words === lugares) {
     
-    setCookie('categoria', 'lugares', 1);
+   
+    localStorage.setItem('categoria', 'lugares');
     pista='lugares';
     console.log(pista);
 
@@ -59,7 +62,8 @@ else if (words === lugares) {
 
     // createTimer();
      word = selectRandomWord(words);
-     setCookie('chosenWord', word, 1);
+     
+     localStorage.setItem('chosenWord', word);
      createElementWord(word);   //crea el div de la palabra y las letras :D
 
   createPistaDiv();
@@ -88,7 +92,8 @@ else if (words === lugares) {
     
  }
  function updateTimer(){
-    setCookie('tiempo', tiempo, 1);
+ 
+    localStorage.setItem('tiempo', tiempo);
     let timer=document.querySelector('.timer');
     timer.innerText=tiempo;
     tiempo++;
@@ -152,16 +157,20 @@ function checkletter(input) {
             
             
             
-            setCookie('GuessedLetters', lettersUsed.join(','), 1);
+            
+            localStorage.setItem('GuessedLetters', lettersUsed.join(','));
             // Incrementar el contador de aciertos por cada ocurrencia de la letra acertada
             const occurrences = Array.from(letters).filter(letter => letter.classList.contains('lettersolved')).length;
             success += occurrences;
             console.log('aciertos: ' + success);
-            setCookie('successfulGuesses', success, 1);
+            
+            localStorage.setItem('successfulGuesses', success);
         } else {
             misses++;
-            setCookie('GuessedLetters', lettersUsed.join(','), 1);
-            setCookie('missesguesses', misses, 1);
+            
+            localStorage.setItem('GuessedLetters', lettersUsed.join(','));
+           
+            localStorage.setItem('missesguesses', misses);
             updatehangman(misses);
             console.log('fallos: ' + misses);
         }
@@ -394,7 +403,7 @@ function showWinDiv(){
     divjuego.classList.add('hide');
     windiv.classList.remove('hide');
     windiv.classList.add('show');
-    cleancookies();
+    cleanStorages();
     
     
     
@@ -427,28 +436,12 @@ function showLoserDiv(){
     divjuego.classList.add('hide');
     loserDiv.classList.remove('hide');
     loserDiv.classList.add('show');
-    cleancookies();
+    cleanStorages();
    
    
 }
    
 
-function setCookie(name, value, days) {
-    const expires = new Date();
-    expires.setTime(expires.getTime() + days * 24 * 60 * 60 * 1000);
-    document.cookie = name + '=' + value + ';expires=' + expires.toUTCString();
-}
-
-function getCookie(name) {
-    const cookies = document.cookie.split(';');
-    for (let cookie of cookies) {
-        const [cookieName, cookieValue] = cookie.split('=');
-        if (cookieName.trim() === name) {
-            return cookieValue;
-        }
-    }
-    return null;
-}
 
 
 
@@ -459,13 +452,20 @@ function getCookie(name) {
 
 function loadGame() {
     createTimer();
-    // Verificar si existen cookies relevantes
-    let chosenWord = getCookie('chosenWord');
-    let guessedLetters = getCookie('GuessedLetters');
-    let successfulGuesses = parseInt(getCookie('successfulGuesses')) || 0;
-    let missesguesses = parseInt(getCookie('missesguesses')) || 0;
-    let tiempocokie = parseInt(getCookie('tiempo')) || 0;
-    let pistacookie = getCookie('categoria');
+    // Verificar si hay localstorage disponible
+   
+    let chosenWord = localStorage.getItem('chosenWord');
+   
+    let guessedLetters = localStorage.getItem('GuessedLetters');
+   
+    let successfulGuesses = localStorage.getItem('successfulGuesses');
+   
+    let missesguesses = localStorage.getItem('missesguesses');
+    
+   
+    let tiempostorage = localStorage.getItem('tiempo');
+    
+    let pistastorage= localStorage.getItem('categoria');
 
     // Si hay datos guardados, actualizar las variables del juego
     if (chosenWord && guessedLetters !== null && !isNaN(successfulGuesses) && !isNaN(misses)) {
@@ -473,8 +473,8 @@ function loadGame() {
         lettersUsed = guessedLetters.split(',');
         success = successfulGuesses;
         misses = missesguesses;
-        tiempo = tiempocokie;
-        pista = pistacookie;
+        tiempo = tiempostorage;
+        pista = pistastorage;
         
         // Actualizar elementos en la interfaz según los datos cargados
         createElementWord(word);   //crea el div de la palabra y las letras :D
@@ -501,14 +501,9 @@ function loadGame() {
     }
     }
 }
-function cleancookies() {
-    setCookie('chosenWord', '', -1);
-    setCookie('GuessedLetters', '', -1);
-    setCookie('missesguesses', '0', -1);
-    setCookie('successfulGuesses', '0', -1);
-    setCookie('username', '', -1);
-    setCookie('tiempo', '0', -1);
-    setCookie('categoria', '', -1);
+function cleanStorages() {
+    localStorage.clear();
+   
     
     loadGame();
 }
