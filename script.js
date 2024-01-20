@@ -378,9 +378,10 @@ function createButtons(){
 
 
 function createWinDiv(){
-    let  frase = selectPhrase(word);
+    const selectedContent = selectContent(word);
+    let  frase = selectedContent.text;
     console.log(frase);
-    let ruta = selectImage();
+    let ruta = selectedContent.image;
     console.log(ruta);
     
     
@@ -458,9 +459,9 @@ function loadGame() {
    
     let guessedLetters = localStorage.getItem('GuessedLetters');
    
-    let successfulGuesses = localStorage.getItem('successfulGuesses');
+    let successfulGuesses = parseInt(localStorage.getItem('successfulGuesses'));
    
-    let missesguesses = localStorage.getItem('missesguesses');
+    let missesguesses = parseInt(localStorage.getItem('missesguesses'));
     
    
     let tiempostorage = localStorage.getItem('tiempo');
@@ -528,81 +529,139 @@ function selectRandomArray(array) {
 
 
 
-function selectImage() {
-    // objeto que une las palabras con las imagenes
-    const imgsrc = {
-        'avion': './img/avion.png',
-        'barco': './img/barco.png',
-        'globo': './img/globo.png',
-        'bicicleta': './img/bicicleta.png',
-        'coche': './img/coche.png',
-        'tren': './img/tren.png',
-        'barca': './img/barca.png',
-        'helicoptero': './img/helicoptero.png',
-        'patinete': './img/patinete.png',
-        'submarino': './img/submarino.png',
-        'elefante': './img/elefante.png',
-        'jirafa': './img/jirafa.png',
-        'tigre': './img/tigre.png',
-        'leon': './img/leon.png',
-        'mariposa': './img/mariposa.png',
-        'ballena': './img/ballena.png',
-        'delfin': './img/delfin.png',
-        'mono': './img/mono.png',
-        'tortuga': './img/tortuga.png',
-        'canguro': './img/canguro.png',
-        'monte': './img/monte.png',
-        'playa': './img/playa.png',
-        'isla': './img/isla.png',
-        'selva': './img/selva.png',
-        'desierto': './img/desierto.png',
-        'piramide': './img/piramide.png',
-        'castillo': './img/castillo.png',
-        'ciudad': './img/ciudad.png',
-        'parque': './img/parque.png',
-        'espacio': './img/espacio.png'
+
+
+
+
+
+function selectContent(word) {
+    // Objeto que contiene las rutas de las imágenes y las frases asociadas
+    const content = {
+        'avion': {
+            image: './img/avion.png',
+            text: 'Los aviones vuelan alto en el cielo, transportando pasajeros y mercancías de un lugar a otro.'
+        },
+        'barco': {
+            image: './img/barco.png',
+            text: 'Los barcos surcan mares y océanos, facilitando el comercio y la conexión entre diferentes regiones.'
+        },
+        'globo': {
+            image: './img/globo.png',
+            text: 'Los globos aerostáticos flotan majestuosamente en el aire, ofreciendo vistas panorámicas desde las alturas.'
+        },
+        'bicicleta': {
+            image: './img/bicicleta.png',
+            text: 'Las bicicletas son una opción saludable y divertida de transporte, ideal para hacer ejercicio al aire libre.'
+        },
+        'coche': {
+            image: './img/coche.png',
+            text: 'Los coches nos llevan a lugares lejanos con rapidez, haciendo que viajar sea conveniente y emocionante.'
+        },
+        'tren': {
+            image: './img/tren.png',
+            text: 'Los trenes recorren distancias largas sobre rieles, conectando ciudades y facilitando el transporte masivo.'
+        },
+        'barca': {
+            image: './img/barca.png',
+            text: 'Las barcas son embarcaciones pequeñas ideales para explorar ríos y lagos de manera tranquila.'
+        },
+        'helicoptero': {
+            image: './img/helicoptero.png',
+            text: 'Los helicópteros despegan y aterrizan verticalmente, facilitando el acceso a lugares de difícil alcance.'
+        },
+        'patinete': {
+            image: './img/patinete.png',
+            text: 'Los patinetes son una forma divertida y ecológica de moverse por la ciudad y disfrutar del aire libre.'
+        },
+        'submarino': {
+            image: './img/submarino.png',
+            text: 'Los submarinos exploran las profundidades del océano, revelando secretos submarinos y estudiando la vida marina.'
+        },
+        'elefante': {
+            image: './img/elefante.png',
+            text: 'Los elefantes son animales majestuosos y sociales, viviendo en manadas y siendo conocidos por su inteligencia.'
+        },
+        'jirafa': {
+            image: './img/jirafa.png',
+            text: 'Las jirafas tienen cuellos largos que les permiten alcanzar hojas en lo alto de los árboles, son criaturas asombrosas.'
+        },
+        'tigre': {
+            image: './img/tigre.png',
+            text: 'Los tigres son felinos poderosos que cazan con destreza en la selva, siendo vitales para el equilibrio del ecosistema.'
+        },
+        'leon': {
+            image: './img/leon.png',
+            text: 'Los leones son los reyes de la selva, viviendo en manadas y siendo conocidos por su melena y fuerte rugido.'
+        },
+        'mariposa': {
+            image: './img/mariposa.png',
+            text: 'Las mariposas son coloridas y delicadas, transformándose desde orugas en capullos para luego volar libremente.'
+        },
+        'ballena': {
+            image: './img/ballena.png',
+            text: 'Las ballenas son gigantes del océano, nadando largas distancias y comunicándose a través de sonidos complejos.'
+        },
+        'delfin': {
+            image: './img/delfin.png',
+            text: 'Los delfines son inteligentes y juguetones, disfrutando de la compañía de su grupo y realizando acrobacias en el agua.'
+        },
+        'mono': {
+            image: './img/mono.png',
+            text: 'Los monos son animales curiosos y ágiles que viven en selvas y bosques, utilizando sus habilidades para moverse entre ramas.'
+        },
+        'tortuga': {
+            image: './img/tortuga.png',
+            text: 'Las tortugas llevan sus cascos a todas partes, protegiéndolas mientras exploran la tierra y nadan en el agua.'
+        },
+        'canguro': {
+            image: './img/canguro.png',
+            text: 'Los canguros son marsupiales saltarines que viven en Australia, llevando a sus crías en una bolsa especial.'
+        },
+        'monte': {
+            image: './img/monte.png',
+            text: 'Los montes son elevaciones naturales de la tierra, ofreciendo vistas panorámicas y siendo el hogar de diversos ecosistemas.'
+        },
+        'playa': {
+            image: './img/playa.png',
+            text: 'Las playas son lugares hermosos donde la arena se encuentra con el mar, proporcionando un entorno relajante y divertido.'
+        },
+        'isla': {
+            image: './img/isla.png',
+            text: 'Las islas son porciones de tierra rodeadas de agua, con su propia flora y fauna, ideales para la exploración y la aventura.'
+        },
+        'selva': {
+            image: './img/selva.png',
+            text: 'Las selvas tropicales son ecosistemas exuberantes y llenos de vida, albergando una diversidad increíble de plantas y animales.'
+        },
+        'desierto': {
+            image: './img/desierto.png',
+            text: 'Los desiertos son vastas extensiones de tierra seca y arenosa, con paisajes impresionantes y adaptaciones únicas de la vida.'
+        },
+        'piramide': {
+            image: './img/piramide.png',
+            text: 'Las pirámides son estructuras antiguas construidas por civilizaciones pasadas, llenas de misterio y significado histórico.'
+        },
+        'castillo': {
+            image: './img/castillo.png',
+            text: 'Los castillos son fortalezas imponentes construidas para proteger a la realeza, llenos de historia y arquitectura impresionante.'
+        },
+        'ciudad': {
+            image: './img/ciudad.png',
+            text: 'Las ciudades son centros bulliciosos de actividad humana, con edificios altos, calles animadas y diversas oportunidades.'
+        },
+        'parque': {
+            image: './img/parque.png',
+            text: 'Los parques son espacios verdes donde las personas pueden disfrutar de la naturaleza, hacer ejercicio y relajarse.'
+        },
+        'espacio': {
+            image: './img/espacio.png',
+            text: 'El espacio es vasto y misterioso, lleno de estrellas, planetas y galaxias, ofreciendo un infinito para la exploración y la maravilla.'
+        }
     };
 
     const lowercaseWord = word.toLowerCase();
-    return imgsrc[lowercaseWord];
+    return content[lowercaseWord] || null; // Devuelve el objeto correspondiente o null si la palabra no está en el objeto
 }
 
 
-function selectPhrase() {
-    const txtfinal = {
-        'avion': 'Los aviones vuelan alto en el cielo, transportando pasajeros y mercancías de un lugar a otro.',
-        'barco': 'Los barcos surcan mares y océanos, facilitando el comercio y la conexión entre diferentes regiones.',
-        'globo': 'Los globos aerostáticos flotan majestuosamente en el aire, ofreciendo vistas panorámicas desde las alturas.',
-        'bicicleta': 'Las bicicletas son una opción saludable y divertida de transporte, ideal para hacer ejercicio al aire libre.',
-        'coche': 'Los coches nos llevan a lugares lejanos con rapidez, haciendo que viajar sea conveniente y emocionante.',
-        'tren': 'Los trenes recorren distancias largas sobre rieles, conectando ciudades y facilitando el transporte masivo.',
-        'barca': 'Las barcas son embarcaciones pequeñas ideales para explorar ríos y lagos de manera tranquila.',
-        'helicoptero': 'Los helicópteros despegan y aterrizan verticalmente, facilitando el acceso a lugares de difícil alcance.',
-        'patinete': 'Los patinetes son una forma divertida y ecológica de moverse por la ciudad y disfrutar del aire libre.',
-        'submarino': 'Los submarinos exploran las profundidades del océano, revelando secretos submarinos y estudiando la vida marina.',
-        'elefante': 'Los elefantes son animales majestuosos y sociales, viviendo en manadas y siendo conocidos por su inteligencia.',
-        'jirafa': 'Las jirafas tienen cuellos largos que les permiten alcanzar hojas en lo alto de los árboles, son criaturas asombrosas.',
-        'tigre': 'Los tigres son felinos poderosos que cazan con destreza en la selva, siendo vitales para el equilibrio del ecosistema.',
-        'leon': 'Los leones son los reyes de la selva, viviendo en manadas y siendo conocidos por su melena y fuerte rugido.',
-        'mariposa': 'Las mariposas son coloridas y delicadas, transformándose desde orugas en capullos para luego volar libremente.',
-        'ballena': 'Las ballenas son gigantes del océano, nadando largas distancias y comunicándose a través de sonidos complejos.',
-        'delfin': 'Los delfines son inteligentes y juguetones, disfrutando de la compañía de su grupo y realizando acrobacias en el agua.',
-        'mono': 'Los monos son animales curiosos y ágiles que viven en selvas y bosques, utilizando sus habilidades para moverse entre ramas.',
-        'tortuga': 'Las tortugas llevan sus cascos a todas partes, protegiéndolas mientras exploran la tierra y nadan en el agua.',
-        'canguro': 'Los canguros son marsupiales saltarines que viven en Australia, llevando a sus crías en una bolsa especial.',
-        'monte': 'Los montes son elevaciones naturales de la tierra, ofreciendo vistas panorámicas y siendo el hogar de diversos ecosistemas.',
-        'playa': 'Las playas son lugares hermosos donde la arena se encuentra con el mar, proporcionando un entorno relajante y divertido.',
-        'isla': 'Las islas son porciones de tierra rodeadas de agua, con su propia flora y fauna, ideales para la exploración y la aventura.',
-        'selva': 'Las selvas tropicales son ecosistemas exuberantes y llenos de vida, albergando una diversidad increíble de plantas y animales.',
-        'desierto': 'Los desiertos son vastas extensiones de tierra seca y arenosa, con paisajes impresionantes y adaptaciones únicas de la vida.',
-        'piramide': 'Las pirámides son estructuras antiguas construidas por civilizaciones pasadas, llenas de misterio y significado histórico.',
-        'castillo': 'Los castillos son fortalezas imponentes construidas para proteger a la realeza, llenos de historia y arquitectura impresionante.',
-        'ciudad': 'Las ciudades son centros bulliciosos de actividad humana, con edificios altos, calles animadas y diversas oportunidades.',
-        'parque': 'Los parques son espacios verdes donde las personas pueden disfrutar de la naturaleza, hacer ejercicio y relajarse.',
-        'espacio': 'El espacio es vasto y misterioso, lleno de estrellas, planetas y galaxias, ofreciendo un infinito para la exploración y la maravilla.'
-    };
-
-    const lowercaseWord = word.toLowerCase();
-    return txtfinal[lowercaseWord];
-}
 
