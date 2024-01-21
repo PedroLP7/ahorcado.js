@@ -24,7 +24,7 @@ let lugares = ['Monte', 'Playa', 'Isla', 'Selva', 'Desierto', 'Piramide', 'Casti
  let tiempo=0;
  let pista;
  const erroresMaximos =7;
- 
+ //revision
 //usando localstorage en vez de cookies :)
 localStorage.setItem('username', nombreusu);
 
@@ -496,6 +496,7 @@ function loadGame() {
     }
 }
 function cleanStorages() {
+    //revision
     //limpuiar localstorage
     localStorage.clear();
    
@@ -529,6 +530,7 @@ function selectRandomArray(array) {
 
 
 function selectContent(word) {
+    //revision
     // Objeto que contiene las rutas de las imágenes y las frases asociadas
     const content = {
         'avion': {
