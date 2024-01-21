@@ -264,3 +264,17 @@ user-select: none;
 
 }
 
+
+.used{
+
+background-color: grey;
+color: white;
+
+
+
+
+}
+
+.used:hover {
+    background-color: black;
+}

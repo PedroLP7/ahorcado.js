@@ -350,31 +350,31 @@ function startGame(){
 }
 
 
-function createButtons(){
+function createButtons() {
     for (let letra = 65; letra <= 90; letra++) {
         let letraChar = String.fromCharCode(letra);
 
         let newbutton = document.createElement("button");
-        newbutton.classList.add('button'+letraChar);
+        newbutton.classList.add('button' + letraChar);
         newbutton.classList.add('buttonsleters');
         newbutton.textContent = letraChar;
-        if (lettersUsed.includes(letraChar.toLowerCase())) {
-            newbutton.disabled = true;
+// cambios del disabled del boton aqui :)
+        function buttonClickHandler() {
+            checkletter(letraChar);
+            newbutton.classList.add('used');
+            newbutton.removeEventListener('click', buttonClickHandler);
         }
 
-
-        newbutton.addEventListener('click', function() {
-            checkletter(letraChar);
-            newbutton.disabled=true;
-        });
-        
+        newbutton.addEventListener('click', buttonClickHandler);
+        if (lettersUsed.includes(letraChar.toLowerCase())) {
+            newbutton.classList.add('used');
+            newbutton.removeEventListener('click', buttonClickHandler);
+        }
 
         divjuego.appendChild(newbutton);
-
-
-
+    }
 }
-}
+
 
 
 function createWinDiv(){
@@ -412,8 +412,9 @@ function showWinDiv(){
 
 
 function createLoseDiv(){
-    let  frase = selectPhrase(word);
-    let ruta = selectImage();
+    let selectedContent = selectContent(word);
+    let  frase = selectedContent.text;
+    let ruta = selectedContent.image;
     console.log(ruta);
     
   
