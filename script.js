@@ -33,6 +33,7 @@ localStorage.setItem('username', nombreusu);
 
  
  if (!word) {
+    let words;
     let arraySeleccionado=selectRandomArray([transportes,animales,lugares]);
 words=arraySeleccionado;
 if (transportes === words) {
@@ -449,7 +450,6 @@ function loadGame() {
     // Verificar si hay localstorage disponible
    
     let chosenWord = localStorage.getItem('chosenWord');
-   
     let guessedLetters = localStorage.getItem('GuessedLetters');
    
     let successfulGuesses = parseInt(localStorage.getItem('successfulGuesses'));
@@ -462,7 +462,7 @@ function loadGame() {
     let pistastorage= localStorage.getItem('categoria');
 
     // Si hay datos guardados, actualizar las variables del juego
-    if (chosenWord && guessedLetters !== null && !isNaN(successfulGuesses) && !isNaN(misses)) {
+    if (chosenWord || guessedLetters !== null && !isNaN(successfulGuesses) && !isNaN(misses)) {
         word = chosenWord;
         lettersUsed = guessedLetters.split(',');
         success = successfulGuesses;
@@ -500,7 +500,7 @@ function cleanStorages() {
     localStorage.clear();
    
     
-    loadGame();
+     loadGame();
 }
 
 
