@@ -25,7 +25,7 @@ let lugares = ['Monte', 'Playa', 'Isla', 'Selva', 'Desierto', 'Piramide', 'Casti
  let pista;
  const erroresMaximos =7;
  
-
+//usando localstorage en vez de cookies :)
 localStorage.setItem('username', nombreusu);
 
  loadGame();
@@ -496,6 +496,7 @@ function loadGame() {
     }
 }
 function cleanStorages() {
+    //limpuiar localstorage
     localStorage.clear();
    
     
